@@ -37,7 +37,9 @@ var vent;
         //'sync' event is fired on the model/collection when ajax gets succeeded
         this.once("sync", function() {
             //hide the spinner
-			$(_options.spinnerSelector).css('display', 'none');
+			if(_xhrArray.length == 0){
+				$(_options.spinnerSelector).css('display', 'none');
+			}
 			//show success toaster
 			if(!options.doNotshowToaster && _showToaster){
 				$(_options.toasterSelector).addClass(_options.toasterSuccessClass);
