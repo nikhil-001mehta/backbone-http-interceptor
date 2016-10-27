@@ -2,18 +2,15 @@ var vent;
 (function(backboneHttpInterceptor){
 	'use strict';
     if (typeof define === 'function' && define.amd) {
-		vent = require('vent');
-		if(!vent){
-			define("vent", ["backbone"], function(Backbone) {
-				return new Backbone.Wreqr.EventAggregator();
-			});
-		}
         define('backboneHttpInterceptor', ['jquery', 'backbone', 'underscore', 'vent'], backboneHttpInterceptor);
+    } else if(typeof module !== 'undefined' && module.exports) {
+        // CommonJS
+		var jq = require('jquery'),bb =	require('backbone'),_ = require('underscore');
+        module.exports = backboneHttpInterceptor(jq,bb,_);
     } else {
-		vent = vent || new backbone.Wreqr.EventAggregator();
         backboneHttpInterceptor($, Backbone, underscore, vent);
     }
-}(function($, Backbone, underscore, vent){
+}(function($, Backbone, underscore){
 	'use strict';
 	if(!Backbone){
 		throw 'Please include Backbone.js before Backbone.HttpInterceptor.js';
