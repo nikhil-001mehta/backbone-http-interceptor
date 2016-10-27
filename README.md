@@ -4,4 +4,4 @@ Using this project you can intercept every ajax request which is fired using bac
 During interceptions we given you some default options as below to show/hide spinner/toaster. By modifying the cource code you can also add your custom headers to your request/response.
 On more how to use please see the wiki page of the project.
 
-Still writing.....
+
