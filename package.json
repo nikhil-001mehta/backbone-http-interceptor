@@ -1,0 +1,22 @@
+{
+  "name": "backbonehttpinterceptor",
+  "version": "1.0.0",
+  "description": "Ajax interceptor for Backbone.js to show spinner and toaster from one place",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm install -g gulp"
+  },
+  "author": "ImpactUS",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-minify": "0.0.14",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.4",
+    "map-stream": "0.0.6"
+  },
+  "dependencies": {}
+}

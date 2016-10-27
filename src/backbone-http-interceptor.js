@@ -5,15 +5,15 @@ var vent;
 		vent = require('vent');
 		if(!vent){
 			define("vent", ["backbone"], function(Backbone) {
-				return new Backbone.Wreqr.EventAggregator
+				return new Backbone.Wreqr.EventAggregator();
 			});
 		}
         define('backboneHttpInterceptor', ['jquery', 'backbone', 'underscore', 'vent'], backboneHttpInterceptor);
     } else {
-		vent = vent || new backbone.Wreqr.EventAggregator;
+		vent = vent || new backbone.Wreqr.EventAggregator();
         backboneHttpInterceptor($, Backbone, underscore, vent);
     }
-}(function($, Backbone, underscore, vent)(
+}(function($, Backbone, underscore, vent){
 	'use strict';
 	if(!Backbone){
 		throw 'Please include Backbone.js before Backbone.HttpInterceptor.js';
@@ -26,6 +26,13 @@ var vent;
 	var _xhrArray = [];
 	var _options = {};
 	var _showSpinner,_showToaster;
+	
+	var _removeCompletedXhrs = function(){
+		return underscore.reject(_xhrArray, function(xhr) {
+				//remove all xhrs which are completed since we can not abort them
+				return 4 === xhr.readyState;
+		});
+	};
 	// here options can contain the text which you want to show on spinner and toaster
     var _showSpinnerandToaster = function(method, options) {
         if("create" === method || "update" === method || "patch" === method || "read" === method) {
@@ -36,8 +43,9 @@ var vent;
         //using once here because none of this will be called twice
         //'sync' event is fired on the model/collection when ajax gets succeeded
         this.once("sync", function() {
-            //hide the spinner
-			if(_xhrArray.length == 0){
+            _xhrArray = _removeCompletedXhrs();
+			//hide the spinner if no pending in process ajax
+			if(_xhrArray.length === 0){
 				$(_options.spinnerSelector).css('display', 'none');
 			}
 			//show success toaster
@@ -73,8 +81,8 @@ var vent;
     };
 	
 	var abortAllPendingXhrs = function() {
-		underscore.invoke(_xhrArray, "abort"),
-		_xhrArray = []
+		underscore.invoke(_xhrArray, "abort");
+		_xhrArray = [];
 	};
 	
 	var setInterceptorOptions = function(options){
@@ -114,12 +122,9 @@ var vent;
 				this.cancelRequest = function(){
 					//invoke cancelRequest on model if you want to abort the AJAX call
 					xhr.abort();
-				}
+				};
 			}
-			_xhrArray = underscore.reject(_xhrArray, function(xhr) {
-				//remove all xhrs which are completed since we can not abort them
-				return 4 === xhr.readyState
-			}),
+			_xhrArray = _removeCompletedXhrs();
 			return xhr;
 		};
 	};
@@ -127,9 +132,9 @@ var vent;
 	Backbone.HttpInterceptor.VERSION = '1.0.0';
     
 	_.extend(Backbone.HttpInterceptor.prototype, {
-		setOptions = setInterceptorOptions,
+		setOptions : setInterceptorOptions,
 		start: startHttpInterceptor,
 		abortAllPendingRequests : abortAllPendingXhrs
 	});
 	return Backbone.httpInterceptor;
-)));
+}));
