@@ -26,7 +26,12 @@ var exitOnJshintError = map(function (file, cb) {
 
 var lint = function() {
   return gulp.src('./src/*.js')
-    .pipe(gulpJshint())
+    .pipe(gulpJshint({
+	"curly": true,
+	"eqeqeq": true,
+	"nocomma": true,
+	"debug": false
+  }))
     .pipe(gulpJshint.reporter('default'))
     .pipe(exitOnJshintError);
 };

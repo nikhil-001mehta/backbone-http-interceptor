@@ -23,7 +23,6 @@ var vent;
 	var _xhrArray = [];
 	var _options = {};
 	var _showSpinner,_showToaster;
-	
 	var _removeCompletedXhrs = function(){
 		return underscore.reject(_xhrArray, function(xhr) {
 				//remove all xhrs which are completed since we can not abort them
@@ -54,7 +53,9 @@ var vent;
 				$(_options.toasterSelector).removeClass(_options.toasterSuccessClass);
 			}
             //remove cancelRequest since now on you can not abort the AJAX
-            if(this.cancelRequest) delete this.cancelRequest;
+            if(this.cancelRequest) {
+				delete this.cancelRequest;
+			}
             //remove error callback since it will not be called now
             this.off("error");
         });
@@ -71,7 +72,9 @@ var vent;
 				$(_options.toasterSelector).removeClass(_options.toasterErrorClass);
 			}
             //remove cancelRequest since now on you can not abort the AJAX
-            if(this.cancelRequest) delete this.cancelRequest;
+            if(this.cancelRequest) {
+				delete this.cancelRequest;
+			}
             //remove sync callback since it will not be called now
             this.off("sync");
         });
