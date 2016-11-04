@@ -5,10 +5,10 @@ var vent;
         define('backboneHttpInterceptor', ['jquery', 'backbone', 'underscore', 'vent'], backboneHttpInterceptor);
     } else if(typeof module !== 'undefined' && module.exports) {
         // CommonJS
-		var jq = require('jquery'),bb =	require('backbone'),_ = require('underscore');
-        module.exports = backboneHttpInterceptor(jq,bb,_);
+		var jq = require('jquery'),bb =	require('backbone'),underscore = require('underscore');
+        module.exports = backboneHttpInterceptor(jq,bb,underscore);
     } else {
-        backboneHttpInterceptor($, Backbone, underscore, vent);
+        backboneHttpInterceptor($, Backbone, _, vent);
     }
 }(function($, Backbone, underscore){
 	'use strict';
