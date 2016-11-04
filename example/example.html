@@ -7,18 +7,58 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.radio/2.0.0/backbone.radio.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.marionette/3.1.0/backbone.marionette.js"></script>
+		<script src="http://rawgit.com/nikhil-001mehta/backbone-http-interceptor/master/release/backbone.httpInterceptor.min.js"></script>
 		<script type="text/html" id="post-layout-view">
 			<div class="first-region"></div>
 			<div class="second-region"></div>
 		</script>
-		<script type="text/html" id="post-item-view">
-			
+		<script type="text/html" id="post-composite-view">
+			<button class="success">Success</button>
+			<button class="error">Error</button>
+			<table>
+				<thead>
+					<tr>
+						<th>userId</th>
+						<th>id</th>
+						<th>title</th>
+						<th>body</th>
+					</tr>
+				</thead>
+				<tbody id="item-view-container">
+				</tbody>
+			</table>
 		</script>
 		<script type="text/html" id="post-item-view">
-			
+			<td><%= userId %></td>
+			<td><%= id %></td>
+			<td><%= title %></td>
+			<td><%= body %></td>
 		</script>
 		<script type="text/javascript">
 			var app = new Backbone.Marionette.Application();
+			var postsItemView = Backbone.Marionette.View.extend({
+				tagName: 'tr',
+				template: '#post-item-view'
+			});
+			var postsCollection = Backbone.Collection.extend({
+				model: Backbone.Model,
+				url: "http://jsonplaceholder.typicode.com/posts"
+			});
+			var postsCompositeView = Backbone.Marionette.CompositeView.extend({
+				childView: postsItemView,
+				childViewContainer: '#item-view-container',
+				template: '#post-composite-view',
+				events: {
+					'click .success': "getData",
+					'click .error': "removeData"
+				},
+				collection: new postsCollection(),
+				getData: function(){
+					this.collection.fetch();
+				},
+				removeData: function(){
+				}
+			});
 			var renderLayout = function(){
 				var layout = Backbone.Marionette.View.extend({
 					el: '#main-container',
@@ -28,20 +68,25 @@
 						second: '.second-region'
 					},
 					onRender: function(){
-						this.showChildView('first', );
+						this.showChildView('first', new postsCompositeView());
 					}
 				});
 				var myLayout = new layout();
 				myLayout.render();
 			};
 			Backbone.history.start({pushState: true, root: "/"});
+			debugger;
+			var backboneInterceptor = new Backbone.HttpInterceptor
+			backboneInterceptor.start({
+				spinnerSelector: '#spinner'
+			});
 			$(document).ready(function(){
 				renderLayout();
 			});
 		</script>
 	</head>
 	<body>
-		<div class="overlay" style="display:none;">
+		<div id="spinner" class="overlay" style="display:none;">
 			<div id="fountainG">
 				<div id="fountainG_1" class="fountainG"></div>
 				<div id="fountainG_2" class="fountainG"></div>
