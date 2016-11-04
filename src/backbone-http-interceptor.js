@@ -8,7 +8,7 @@ var vent;
 		var jq = require('jquery'),bb =	require('backbone'),underscore = require('underscore');
         module.exports = backboneHttpInterceptor(jq,bb,underscore);
     } else {
-        backboneHttpInterceptor($, Backbone, _, vent);
+        backboneHttpInterceptor($, Backbone, _);
     }
 }(function($, Backbone, underscore){
 	'use strict';
