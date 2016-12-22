@@ -8,10 +8,10 @@ See example for more information.
 #Installation
 simply include this plugin after everything is loaded except your files
 <pre>
-<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+"<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
-<script src="http://rawgit.com/nikhil-001mehta/backbone-http-interceptor/master/release/backbone.httpInterceptor.min.js"></script>
+<script src="http://rawgit.com/nikhil-001mehta/backbone-http-interceptor/master/release/backbone.httpInterceptor.min.js"></script>"
 </pre>
 <your files here afterwards> 
 
