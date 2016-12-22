@@ -18,6 +18,7 @@ var backboneInterceptor = new Backbone.HttpInterceptor
 			backboneInterceptor.start(options object);
 
 #available options are
+<pre>
 options = {
 			spinnerSelector: 'unique selector for showing/hiding the spinner during ajax request is in progress',
 			spinnerTextSelector: 'unique selector to show text in spinner i.e. saving/loading/processing etc',
@@ -30,6 +31,7 @@ options = {
 			toasterSuccessClass: 'class to apply to toasterSelector when ajax request is succeeds',
 			toasterErrorClass: 'class to apply to toasterSelector when ajax request is fails',
 		 };
+</pre>
 
 after installation simply call fetch/save method you can see spinner/toaster as per your options
 var todoModel = new Backbone.Model({
