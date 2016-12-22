@@ -7,11 +7,13 @@ See example for more information.
 
 #Installation
 simply include this plugin after everything is loaded except your files
+<pre>
 &lt;script src="https://code.jquery.com/jquery-3.1.1.js"&gt; &lt;&#47;script&gt;
-&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"&gt; &lt&#47;script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"&gt; &lt;&#47;script&gt;
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"&gt; &lt;&#47;script&gt;
 &lt;script src="http://rawgit.com/nikhil-001mehta/backbone-http-interceptor/master/release/backbone.httpInterceptor.min.js"&gt; &lt;&#47;script&gt;
 &lt;your files here afterwards&gt;
+</pre>
 
 #Usage
 <pre>
