@@ -75,7 +75,6 @@
 				myLayout.render();
 			};
 			Backbone.history.start({pushState: true, root: "/"});
-			debugger;
 			var backboneInterceptor = new Backbone.HttpInterceptor
 			backboneInterceptor.start({
 				spinnerSelector: '#spinner'
