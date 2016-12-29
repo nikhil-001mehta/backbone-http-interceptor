@@ -41,7 +41,13 @@
 			});
 			var postsCollection = Backbone.Collection.extend({
 				model: Backbone.Model,
-				url: "http://jsonplaceholder.typicode.com/todos"
+				url: function(){
+					if(this.isSuccess){
+						return "http://jsonplaceholder.typicode.com/todos"
+					} else { 
+						return "http://querty.typicode.com/todos"
+					}
+				}
 			});
 			var postsCompositeView = Backbone.Marionette.CompositeView.extend({
 				childView: postsItemView,
@@ -53,9 +59,13 @@
 				},
 				collection: new postsCollection(),
 				getData: function(){
+					this.collection.isSuccess = true;
 					this.collection.fetch();
 				},
 				removeData: function(){
+					this.collection.isSuccess = false;
+					this.collection.reset();
+					this.collection.fetch();
 				}
 			});
 			var renderLayout = function(){
