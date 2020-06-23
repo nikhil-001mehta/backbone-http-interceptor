@@ -5,7 +5,7 @@ During interceptions we given you some default options as below to show/hide spi
 
 See example for more information.
 
-#Installation
+# Installation
 simply include this plugin after everything is loaded except your files
 <pre>
 &lt;script src="https://code.jquery.com/jquery-3.1.1.js"&gt; &lt;&#47;script&gt;
@@ -15,13 +15,13 @@ simply include this plugin after everything is loaded except your files
 &lt;your files here afterwards&gt;
 </pre>
 
-#Usage
+# Usage
 <pre>
 var backboneInterceptor = new Backbone.HttpInterceptor
 			backboneInterceptor.start(options object);
 </pre>
 
-#available options are
+## available options are
 <pre>
 options = {
 			spinnerSelector: 'unique selector for showing/hiding the spinner during ajax request is in progress',
